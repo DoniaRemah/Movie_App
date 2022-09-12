@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Movie Buster</string>
+    <string name="rdDate">Release Date:</string>
+    <string name="TopRatedString">Top Rated Movies</string>
+    <string name="UpcomingString">Upcoming Movies</string>
+    <string name="PopularString">Popular Movies</string>
+    <string name="DescHeaderString">Description</string>
+
+</resources>
