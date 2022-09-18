@@ -8,8 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FF9800</color>
     <color name="lightBlue">#8B83B3EF</color>
-    <color name="brgndblue">#C6161F2C</color>
+    <color name="brgndblue">#0E1113</color>
+    <color name="brgndblue2">#C6161F2C</color>
     <color name="TextBlue">#C8454649</color>
     <color name="TextWhite">#FAF4EF</color>
     <color name="rdWhite">#AEFAF4EF</color>
+    <color name="HotPink">#B52B65</color>
+
 </resources>

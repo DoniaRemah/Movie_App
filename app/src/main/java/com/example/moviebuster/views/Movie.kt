@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import com.example.moviebuster.R
+import com.example.moviebuster.databinding.ActivityMovieBinding
 import com.example.moviebuster.model.*
 import com.example.moviebuster.network.RetrofitModule
 import com.squareup.picasso.Picasso
@@ -15,26 +17,24 @@ import retrofit2.Response
 
 class Movie : AppCompatActivity() {
 
+    private lateinit var binding : ActivityMovieBinding
     lateinit var poster:ImageView
     lateinit var titleTv:TextView
     lateinit var descTv:TextView
     lateinit var rDate:TextView
-//    val poster:ImageView = findViewById<ImageView>(R.id.moviePoster)
-//    val titleTv:TextView = findViewById<TextView>(R.id.movieTitle)
-//    val descTv:TextView = findViewById<TextView>(R.id.DescText)
-//    val rDate:TextView = findViewById<TextView>(R.id.rDateTV)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie)
 
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_movie)
 
         val mymovie = intent.getIntExtra("EXTRA_TPMovieId",0)
 
-        poster= findViewById<ImageView>(R.id.moviePoster)
-        titleTv= findViewById<TextView>(R.id.movieTitle)
-        descTv= findViewById<TextView>(R.id.DescText)
-        rDate = findViewById<TextView>(R.id.rDateTV)
+        poster= binding.moviePoster
+        titleTv= binding.movieTitle
+        descTv= binding.DescText
+        rDate = binding.rDateTV
 
         getTPMovie(mymovie)
 
