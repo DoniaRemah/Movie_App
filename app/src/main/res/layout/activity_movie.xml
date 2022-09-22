@@ -16,20 +16,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="@dimen/_10sdp"
-            tools:context=".views.Movie">
+            tools:context=".views.MovieActivity">
 
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/moviePoster"
-                android:layout_width="@dimen/_150sdp"
-                android:layout_height="@dimen/_200sdp"
-                android:layout_marginTop="@dimen/_40sdp"
-                android:scaleType="fitCenter"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/CardView_Poster"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardElevation="@dimen/_10sdp"
+                app:cardCornerRadius="@dimen/_6sdp"
+                android:layout_margin="@dimen/_10sdp"
+                app:cardMaxElevation="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/roundImageView" />
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/moviePoster"
+                    android:layout_width="@dimen/_160sdp"
+                    android:layout_height="@dimen/_230sdp"
+                    app:circularflow_defaultRadius="@dimen/_20sdp"
+                    android:scaleType="centerCrop"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
 
             <TextView
                 android:id="@+id/movieTitle"
@@ -43,7 +57,7 @@
                 android:textSize="@dimen/_20ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/moviePoster" />
+                app:layout_constraintTop_toBottomOf="@id/CardView_Poster" />
 
 
             <TextView

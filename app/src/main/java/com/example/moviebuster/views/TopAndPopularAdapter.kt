@@ -5,18 +5,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviebuster.R
-import com.example.moviebuster.model.TPList
+import com.example.moviebuster.model.TopAndPopularList
 import com.example.moviebuster.databinding.ItemMovieBinding
 import androidx.databinding.DataBindingUtil
 import com.squareup.picasso.Picasso
 
 
-class TPAdapter(): RecyclerView.Adapter<TPAdapter.MovieItemViewHolder>()
+class TopAndPopularAdapter(): RecyclerView.Adapter<TopAndPopularAdapter.MovieItemViewHolder>()
 {
 
     var onMovieClickListener: OnMovieClickListener? = null
 
-    private var movies: MutableList<TPList> = ArrayList()
+    private var movies: MutableList<TopAndPopularList> = ArrayList()
     class MovieItemViewHolder(val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root){
 
     }
@@ -34,7 +34,7 @@ class TPAdapter(): RecyclerView.Adapter<TPAdapter.MovieItemViewHolder>()
         //holder.binding.movieName.text = item.title.toString()
 
 
-        var pictureUrl = "https://www.themoviedb.org/t/p/w220_and_h330_face"+item.posterPath
+        var pictureUrl = "https://www.themoviedb.org/t/p/original"+item.posterPath
         Picasso.with(holder.binding.PosterImage.context)
             .load(pictureUrl)
             .into(holder.binding.PosterImage)
@@ -47,7 +47,7 @@ class TPAdapter(): RecyclerView.Adapter<TPAdapter.MovieItemViewHolder>()
 
     }
 
-    fun submitListAct2(newItems: List<TPList>?){
+    fun submitListAct2(newItems: List<TopAndPopularList>?){
         clear()
         newItems?.let {
             movies.addAll(it)
@@ -55,7 +55,7 @@ class TPAdapter(): RecyclerView.Adapter<TPAdapter.MovieItemViewHolder>()
     }
 
 
-    fun submitList(newItems: List<TPList>?) {
+    fun submitList(newItems: List<TopAndPopularList>?) {
         clear()
         newItems?.let {
             movies.addAll(it)

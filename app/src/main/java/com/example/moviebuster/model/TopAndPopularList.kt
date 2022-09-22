@@ -4,7 +4,7 @@ package com.example.moviebuster.model
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class TPList(
+data class TopAndPopularList(
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")

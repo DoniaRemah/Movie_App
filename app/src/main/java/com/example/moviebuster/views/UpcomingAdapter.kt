@@ -6,7 +6,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviebuster.R
 import com.example.moviebuster.databinding.ItemMovieBinding
-import com.example.moviebuster.model.TPList
 import com.example.moviebuster.model.UpcomingList
 import com.squareup.picasso.Picasso
 
@@ -27,7 +26,7 @@ class UpcomingAdapter: RecyclerView.Adapter<UpcomingAdapter.MovieItemViewHolder>
     override fun onBindViewHolder(holder: UpcomingAdapter.MovieItemViewHolder, position: Int) {
         val item = movies[position]
 
-        var pictureUrl = "https://www.themoviedb.org/t/p/w220_and_h330_face"+item.posterPath
+        var pictureUrl = "https://www.themoviedb.org/t/p/original"+item.posterPath
         Picasso.with(holder.binding.PosterImage.context)
             .load(pictureUrl)
             .into(holder.binding.PosterImage)

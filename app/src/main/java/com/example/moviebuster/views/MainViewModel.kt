@@ -1,58 +1,65 @@
 package com.example.moviebuster.views
 
-import android.util.Log
+
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.moviebuster.model.TPList
-import com.example.moviebuster.model.TPModel
+import androidx.lifecycle.viewModelScope
+import com.example.moviebuster.model.TopAndPopularList
 import com.example.moviebuster.model.UpcomingList
-import com.example.moviebuster.model.UpcomingModel
-import com.example.moviebuster.network.RetrofitModule
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.moviebuster.repository.Repository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
 
 class MainViewModel:ViewModel() {
 
-    private var service = RetrofitModule.getInstance().service
+    private var _topRatedList = MutableLiveData<List<TopAndPopularList>>()
+    val topRatedList : LiveData<List<TopAndPopularList>>  get() = _topRatedList
 
-    var topRatedList = MutableLiveData<List<TPList>>()
-    var popList = MutableLiveData<List<TPList>>()
-    var upList = MutableLiveData<List<UpcomingList>>()
+    private var _popList = MutableLiveData<List<TopAndPopularList>>()
+    val popList : LiveData<List<TopAndPopularList>>  get() = _popList
+
+    private var _upList = MutableLiveData<List<UpcomingList>>()
+    val upList : LiveData<List<UpcomingList>>  get() = _upList
+
+    private val repo = Repository()
 
 
-     fun getAllData() {
-        service.getTopRatedMovies("fc47660226072874be57974ff797a0cd").enqueue(object :
-            Callback<TPModel> {
-            override fun onResponse(call: Call<TPModel>, response: Response<TPModel>) {
-                topRatedList.value = response.body()?.topRatedList
+    fun getTopRatedMovies(){
+        viewModelScope.launch(Dispatchers.IO) {
+            val res =  repo.getTopRatedMovies()
+            if(res?.isSucessful == true){
+                _topRatedList.postValue(res!!.body.topAndPopularList_model)
+            }else{
+                _topRatedList.postValue(null)
             }
-
-            override fun onFailure(call: Call<TPModel>, t: Throwable) {
-                Log.e("Error", t.message!!)
-            }
-        })
-
-        service.getPopularMovies("fc47660226072874be57974ff797a0cd").enqueue(object :
-            Callback<TPModel> {
-            override fun onResponse(call: Call<TPModel>, response: Response<TPModel>) {
-                popList.value = response.body()?.topRatedList
-            }
-
-            override fun onFailure(call: Call<TPModel>, t: Throwable) {
-                Log.e("Error", t.message!!)
-            }
-        })
-
-        service.getUpcomingMovies("fc47660226072874be57974ff797a0cd").enqueue(object :
-            Callback<UpcomingModel> {
-            override fun onResponse(call: Call<UpcomingModel>, response: Response<UpcomingModel>) {
-                upList.value = response.body()?.UpcomingList
-            }
-
-            override fun onFailure(call: Call<UpcomingModel>, t: Throwable) {
-                Log.e("Error", t.message!!)
-            }
-        })
+        }
     }
+
+
+    fun getPopularMovies(){
+        viewModelScope.launch(Dispatchers.IO) {
+            val res =  repo.getPopularMovies()
+            if(res?.isSucessful == true){
+                _popList.postValue(res.body.topAndPopularList_model)
+            }else{
+                _popList.postValue(null)
+            }
+        }
+    }
+
+    fun getUpcomingMovies(){
+        viewModelScope.launch(Dispatchers.IO) {
+            val res =  repo.getUpcomingMovies()
+            if(res?.isSucessful == true){
+                _upList.postValue(res.body.UpcomingList)
+            }else{
+                _upList.postValue(null)
+            }
+        }
+    }
+
+
+
 }
