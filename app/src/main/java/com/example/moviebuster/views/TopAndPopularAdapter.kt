@@ -31,8 +31,6 @@ class TopAndPopularAdapter(): RecyclerView.Adapter<TopAndPopularAdapter.MovieIte
 
     override fun onBindViewHolder(holder: MovieItemViewHolder, position: Int) {
         val item = movies[position]
-        //holder.binding.movieName.text = item.title.toString()
-
 
         var pictureUrl = "https://www.themoviedb.org/t/p/original"+item.posterPath
         Picasso.with(holder.binding.PosterImage.context)
@@ -55,7 +53,7 @@ class TopAndPopularAdapter(): RecyclerView.Adapter<TopAndPopularAdapter.MovieIte
     }
 
 
-    fun submitList(newItems: List<TopAndPopularList>?) {
+     fun submitList(newItems: List<TopAndPopularList>?) {
         clear()
         newItems?.let {
             movies.addAll(it)

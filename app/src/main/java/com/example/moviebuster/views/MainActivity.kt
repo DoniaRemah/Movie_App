@@ -11,8 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.moviebuster.R
 import com.example.moviebuster.databinding.ActivityMainBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -57,7 +60,9 @@ class MainActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT).show()
 
             }else{
-                tpAdapter.submitList(toplist)
+                lifecycleScope.launch{
+                    tpAdapter.submitList(toplist)
+                }
             }
             return@Observer
         })
@@ -68,7 +73,9 @@ class MainActivity : AppCompatActivity() {
                 val toast = Toast.makeText(this@MainActivity,"Network Error Getting Popular Movies List",
                     Toast.LENGTH_SHORT).show()
             }else{
-                popularAdapter.submitList(poplist)
+                lifecycleScope.launch() {
+                    popularAdapter.submitList(poplist)
+                }
             }
             return@Observer
         })
@@ -79,7 +86,9 @@ class MainActivity : AppCompatActivity() {
                 val toast = Toast.makeText(this@MainActivity,"Network Error Getting Upcoming Movies List",
                     Toast.LENGTH_SHORT).show()
             }else{
-                upcomingAdapter.submitList(uplist)
+                lifecycleScope.launch() {
+                    upcomingAdapter.submitList(uplist)
+                }
             }
             return@Observer
         })
