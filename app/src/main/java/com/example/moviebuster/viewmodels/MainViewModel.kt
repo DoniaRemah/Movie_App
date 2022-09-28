@@ -1,18 +1,17 @@
-package com.example.moviebuster.views
+package com.example.moviebuster.viewmodels
 
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.app.Application
+import androidx.lifecycle.*
 import com.example.moviebuster.model.TopAndPopularList
 import com.example.moviebuster.model.UpcomingList
 import com.example.moviebuster.repository.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
-class MainViewModel:ViewModel() {
+class MainViewModel(application: Application):AndroidViewModel(application){
 
     private var _topRatedList = MutableLiveData<List<TopAndPopularList>>()
     val topRatedList : LiveData<List<TopAndPopularList>>  get() = _topRatedList
@@ -29,19 +28,21 @@ class MainViewModel:ViewModel() {
     fun getTopRatedMovies(){
         viewModelScope.launch(Dispatchers.IO) {
             val res =  repo.getTopRatedMovies()
-            if(res?.isSucessful == true){
-                _topRatedList.postValue(res!!.body.topAndPopularList_model)
+            if(res.isSucessful){
+                withContext(Dispatchers.Main) {
+                    _topRatedList.value = res.body.topAndPopularList_model
+                }
+
             }else{
                 _topRatedList.postValue(null)
             }
         }
     }
 
-
     fun getPopularMovies(){
         viewModelScope.launch(Dispatchers.IO) {
             val res =  repo.getPopularMovies()
-            if(res?.isSucessful == true){
+            if(res.isSucessful){
                 _popList.postValue(res.body.topAndPopularList_model)
             }else{
                 _popList.postValue(null)
@@ -52,7 +53,7 @@ class MainViewModel:ViewModel() {
     fun getUpcomingMovies(){
         viewModelScope.launch(Dispatchers.IO) {
             val res =  repo.getUpcomingMovies()
-            if(res?.isSucessful == true){
+            if(res.isSucessful){
                 _upList.postValue(res.body.UpcomingList)
             }else{
                 _upList.postValue(null)

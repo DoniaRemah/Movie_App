@@ -1,7 +1,6 @@
 package com.example.moviebuster.network
 
 import com.example.moviebuster.model.MovieDetails
-import com.example.moviebuster.model.TopAndPopularList
 import com.example.moviebuster.model.TopandPopularModel
 import com.example.moviebuster.model.UpcomingModel
 import retrofit2.Response

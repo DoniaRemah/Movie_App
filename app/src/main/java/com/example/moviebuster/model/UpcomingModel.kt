@@ -15,3 +15,4 @@ data class UpcomingModel(
     @SerializedName("total_results")
     val totalResults: Int
 )
+

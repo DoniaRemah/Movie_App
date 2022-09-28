@@ -1,4 +1,4 @@
-package com.example.moviebuster.views
+package com.example.moviebuster.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -20,7 +20,7 @@ class MovieViewModel:ViewModel() {
     fun getMovieDetails(id:Int){
         viewModelScope.launch(Dispatchers.IO) {
             val res =  repo.getMovieDetails(id)
-            if(res?.isSucessful == true){
+            if(res.isSucessful){
                 _myMovie.postValue(res.body)
             }else{
                 _myMovie.postValue(null)

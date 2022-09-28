@@ -1,4 +1,4 @@
-package com.example.moviebuster.views
+package com.example.moviebuster.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,20 +13,21 @@ class UpcomingAdapter: RecyclerView.Adapter<UpcomingAdapter.MovieItemViewHolder>
 
     private var movies: MutableList<UpcomingList> = ArrayList()
     class MovieItemViewHolder(val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root)
-    var onMovieClickListener: UpcomingAdapter.OnMovieClickListener? = null
+    var onMovieClickListener: OnMovieClickListener? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UpcomingAdapter.MovieItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieItemViewHolder {
         val view = LayoutInflater.from(parent.context)
 
         val binding: ItemMovieBinding = DataBindingUtil.inflate(view!!,
             R.layout.item_movie,parent,false)
 
-        return UpcomingAdapter.MovieItemViewHolder(binding)
+        return MovieItemViewHolder(binding)
     }
-    override fun onBindViewHolder(holder: UpcomingAdapter.MovieItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MovieItemViewHolder, position: Int) {
         val item = movies[position]
 
-        var pictureUrl = "https://www.themoviedb.org/t/p/original"+item.posterPath
+        val pictureUrl = "https://www.themoviedb.org/t/p/original"+item.posterPath
+
         Picasso.with(holder.binding.PosterImage.context)
             .load(pictureUrl)
             .into(holder.binding.PosterImage)

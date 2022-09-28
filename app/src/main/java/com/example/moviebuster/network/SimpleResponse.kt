@@ -15,10 +15,10 @@ data class SimpleResponse<T>(
 
     //Defining attributes for the response
 
-    val isFailure:Boolean get()= this.status == Status.Failure // is my status of type failure?
+    private val isFailure:Boolean get()= this.status == Status.Failure // is my status of type failure?
     val isSucessful: Boolean get() = this.data?.isSuccessful == true && !isFailure // is my status success and I have a body
     val body: T get() =this.data!!.body()!! // get response body (success IS SURE)
-    val bodyNullable: T? get() = this.data?.body() // get response body (Might be null)
+//    val bodyNullable: T? get() = this.data?.body() // get response body (Might be null)
 
     companion object {
 

@@ -17,11 +17,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitModule {
-    private Cache cache;
     private Gson gson;
     private OkHttpClient okHttpClient;
     private Retrofit retrofit ;
-    private Application context;
+    private final Application context;
     private static RetrofitModule ourInstance;
     private MovieApi service;
 
@@ -47,7 +46,7 @@ public class RetrofitModule {
         try {
             File myDir = new File(context.getCacheDir(), "response");
             myDir.mkdir();
-            cache = new Cache(myDir, cachSize);
+            Cache cache = new Cache(myDir, cachSize);
         } catch (Exception e) {
             e.printStackTrace();
         }
