@@ -19,6 +19,7 @@ class MovieActivity : AppCompatActivity() {
     private lateinit var titleTv:TextView
     private lateinit var descTv:TextView
     private lateinit var rDate:TextView
+    private lateinit var vote:TextView
     private lateinit var viewModel: MovieViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +60,7 @@ class MovieActivity : AppCompatActivity() {
                 titleTv.text = myMovie.title
                 descTv.text = myMovie.overview
                 rDate.text = myMovie.releaseDate
+                vote.text = myMovie.voteAverage.toString()
             }
         }
     }
@@ -68,6 +70,7 @@ class MovieActivity : AppCompatActivity() {
         titleTv= binding.movieTitle
         descTv= binding.DescText
         rDate = binding.rDateTV
+        vote = binding.voteValueTv
     }
 
     }

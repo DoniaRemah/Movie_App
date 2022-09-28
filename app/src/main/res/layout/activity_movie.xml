@@ -14,7 +14,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:paddingTop="@dimen/_10sdp"
             tools:context=".views.MovieActivity">
 
@@ -61,29 +61,54 @@
 
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/voteTv"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text="@string/vote"
+                android:textColor="@color/rdWhite"
+                android:padding="@dimen/_8sdp"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/movieTitle"
+                />
+
+            <TextView
+                android:id="@+id/voteValueTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/_8sdp"
+                android:textColor="@color/rdWhite"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintLeft_toRightOf="@id/voteTv"
+                app:layout_constraintTop_toBottomOf="@id/movieTitle"
+                />
+
+            <TextView
                 android:id="@+id/Rdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:text="@string/rdDate"
                 android:textColor="@color/rdWhite"
                 android:padding="@dimen/_8sdp"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/movieTitle" />
+                app:layout_constraintTop_toBottomOf="@id/voteTv" />
 
             <TextView
                 android:id="@+id/rDateTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
                 android:paddingTop="@dimen/_8sdp"
                 android:textColor="@color/rdWhite"
                 android:textSize="@dimen/_10ssp"
                 app:layout_constraintLeft_toRightOf="@id/Rdate"
-                app:layout_constraintTop_toBottomOf="@id/movieTitle"
+                app:layout_constraintTop_toBottomOf="@id/voteTv"
                  />
 
             <TextView
