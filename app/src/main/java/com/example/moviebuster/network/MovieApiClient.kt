@@ -1,26 +1,25 @@
 package com.example.moviebuster.network
 
-import com.example.moviebuster.model.MovieDetails
-import com.example.moviebuster.model.TopandPopularModel
-import com.example.moviebuster.model.UpcomingModel
+import com.example.moviebuster.model.GeneralMovieDetails
+import com.example.moviebuster.model.GeneralMovies
 import retrofit2.Response
 
 class MovieApiClient(private val movieApi: MovieApi) {
 
-    suspend fun getTopRatedMovies(): SimpleResponse<TopandPopularModel> {
+    suspend fun getTopRatedMovies(): SimpleResponse<GeneralMovies> {
 
         return safeApiCall{movieApi.getTopRatedMovies()}
     }
 
-    suspend fun getPopularMovies():SimpleResponse<TopandPopularModel>{
+    suspend fun getPopularMovies():SimpleResponse<GeneralMovies>{
         return safeApiCall { movieApi.getPopularMovies() }
     }
 
-    suspend fun getUpcomingMovies():SimpleResponse<UpcomingModel>{
+    suspend fun getUpcomingMovies():SimpleResponse<GeneralMovies>{
         return safeApiCall { movieApi.getUpcomingMovies() }
     }
 
-    suspend fun getMovieDetails(id:Int):SimpleResponse<MovieDetails>{
+    suspend fun getMovieDetails(id:Int):SimpleResponse<GeneralMovieDetails>{
         return safeApiCall {
             movieApi.getMovieDetails(id)
         }

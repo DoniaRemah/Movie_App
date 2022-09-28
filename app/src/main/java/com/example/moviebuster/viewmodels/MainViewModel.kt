@@ -3,8 +3,7 @@ package com.example.moviebuster.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.moviebuster.model.TopAndPopularList
-import com.example.moviebuster.model.UpcomingList
+import com.example.moviebuster.model.GeneralMovieDetails
 import com.example.moviebuster.repository.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,14 +12,14 @@ import kotlinx.coroutines.withContext
 
 class MainViewModel(application: Application):AndroidViewModel(application){
 
-    private var _topRatedList = MutableLiveData<List<TopAndPopularList>>()
-    val topRatedList : LiveData<List<TopAndPopularList>>  get() = _topRatedList
+    private var _topRatedList = MutableLiveData<List<GeneralMovieDetails>>()
+    val topRatedList : LiveData<List<GeneralMovieDetails>>  get() = _topRatedList
 
-    private var _popList = MutableLiveData<List<TopAndPopularList>>()
-    val popList : LiveData<List<TopAndPopularList>>  get() = _popList
+    private var _popList = MutableLiveData<List<GeneralMovieDetails>>()
+    val popList : LiveData<List<GeneralMovieDetails>>  get() = _popList
 
-    private var _upList = MutableLiveData<List<UpcomingList>>()
-    val upList : LiveData<List<UpcomingList>>  get() = _upList
+    private var _upList = MutableLiveData<List<GeneralMovieDetails>>()
+    val upList : LiveData<List<GeneralMovieDetails>>  get() = _upList
 
     private val repo = Repository()
 
@@ -28,36 +27,47 @@ class MainViewModel(application: Application):AndroidViewModel(application){
     fun getTopRatedMovies(){
         viewModelScope.launch(Dispatchers.IO) {
             val res =  repo.getTopRatedMovies()
-            if(res.isSucessful){
-                withContext(Dispatchers.Main) {
-                    _topRatedList.value = res.body.topAndPopularList_model
-                }
 
-            }else{
-                _topRatedList.postValue(null)
+            withContext(Dispatchers.Main){
+                if(res.isSucessful){
+                    _topRatedList.value = res.body.movieList
+
+                }else{
+                    _topRatedList.value= null
+                }
             }
+
         }
     }
 
     fun getPopularMovies(){
         viewModelScope.launch(Dispatchers.IO) {
             val res =  repo.getPopularMovies()
-            if(res.isSucessful){
-                _popList.postValue(res.body.topAndPopularList_model)
-            }else{
-                _popList.postValue(null)
+
+            withContext(Dispatchers.Main){
+                if(res.isSucessful){
+                    _popList.value=res.body.movieList
+                }else{
+                    _popList.value =null
+                }
             }
+
+
         }
     }
 
     fun getUpcomingMovies(){
         viewModelScope.launch(Dispatchers.IO) {
             val res =  repo.getUpcomingMovies()
-            if(res.isSucessful){
-                _upList.postValue(res.body.UpcomingList)
-            }else{
-                _upList.postValue(null)
+
+            withContext(Dispatchers.Main){
+                if(res.isSucessful){
+                    _upList.value = res.body.movieList
+                }else{
+                    _upList.value = null
+                }
             }
+
         }
     }
 

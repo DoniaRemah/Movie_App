@@ -15,19 +15,19 @@ class  Repository {
 
     private val apiClient = MovieApiClient(service)
 
-    suspend fun getTopRatedMovies(): SimpleResponse<TopandPopularModel> {
+    suspend fun getTopRatedMovies(): SimpleResponse<GeneralMovies> {
         return apiClient.getTopRatedMovies()
     }
 
-    suspend fun getPopularMovies():SimpleResponse<TopandPopularModel>{
+    suspend fun getPopularMovies():SimpleResponse<GeneralMovies>{
         return apiClient.getPopularMovies()
     }
 
-    suspend fun getUpcomingMovies():SimpleResponse<UpcomingModel>{
+    suspend fun getUpcomingMovies():SimpleResponse<GeneralMovies>{
         return apiClient.getUpcomingMovies()
     }
 
-    suspend fun getMovieDetails(id:Int):SimpleResponse<MovieDetails>{
+    suspend fun getMovieDetails(id:Int):SimpleResponse<GeneralMovieDetails>{
         return apiClient.getMovieDetails(id)
     }
 

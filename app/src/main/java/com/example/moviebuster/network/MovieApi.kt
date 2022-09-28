@@ -10,19 +10,19 @@ interface MovieApi {
 
     @GET("top_rated")
     suspend fun  getTopRatedMovies(@Query("api_key")key:String="fc47660226072874be57974ff797a0cd")
-    : Response<TopandPopularModel>
+    : Response<GeneralMovies>
 
     @GET("popular")
     suspend fun getPopularMovies(@Query("api_key")key:String="fc47660226072874be57974ff797a0cd")
-    : Response<TopandPopularModel>
+    : Response<GeneralMovies>
 
     @GET("upcoming")
     suspend fun getUpcomingMovies(@Query("api_key")key:String="fc47660226072874be57974ff797a0cd")
-    : Response<UpcomingModel>
+    : Response<GeneralMovies>
 
     @GET("{movie_id}")
     suspend fun getMovieDetails(@Path("movie_id")id:Int, @Query("api_key")key:String="fc47660226072874be57974ff797a0cd")
-    : Response<MovieDetails>
+    : Response<GeneralMovieDetails>
 
 }
 

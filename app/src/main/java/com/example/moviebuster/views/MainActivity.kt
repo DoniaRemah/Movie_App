@@ -11,8 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.moviebuster.R
-import com.example.moviebuster.adapters.TopAndPopularAdapter
-import com.example.moviebuster.adapters.UpcomingAdapter
+import com.example.moviebuster.adapters.MoviesAdapter
 import com.example.moviebuster.databinding.ActivityMainBinding
 import com.example.moviebuster.viewmodels.MainViewModel
 import kotlinx.coroutines.launch
@@ -21,9 +20,9 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val tpAdapter = TopAndPopularAdapter()
-    private val popularAdapter = TopAndPopularAdapter()
-    private val upcomingAdapter = UpcomingAdapter()
+    private val tpAdapter = MoviesAdapter()
+    private val popularAdapter = MoviesAdapter()
+    private val upcomingAdapter = MoviesAdapter()
 
     private lateinit var viewModel: MainViewModel
 
@@ -37,30 +36,18 @@ class MainActivity : AppCompatActivity() {
         checkingInternetConnection()
         initializing()
         settingObservers()
-        settingListeners()
-
+        settingListeners(tpAdapter)
+        settingListeners(popularAdapter)
+        settingListeners(upcomingAdapter)
     }
 
 
-    private fun settingListeners(){
-        tpAdapter.onMovieClickListener = object : TopAndPopularAdapter.OnMovieClickListener {
-            override fun onMovieClicked(movieId: Int) {
+    private fun settingListeners(adapter:MoviesAdapter){
+        adapter.onMovieClickInt = object : MoviesAdapter.OnMovieClick {
+            override fun movieClicked(movieId: Int) {
                 switchActivity(movieId)
             }
         }
-
-        popularAdapter.onMovieClickListener = object : TopAndPopularAdapter.OnMovieClickListener {
-            override fun onMovieClicked(movieId: Int) {
-                switchActivity(movieId)
-            }
-        }
-
-        upcomingAdapter.onMovieClickListener = object : UpcomingAdapter.OnMovieClickListener {
-            override fun onMovieClicked(movieId: Int) {
-                switchActivity(movieId)
-            }
-        }
-
     }
 
     private fun switchActivity(movieId:Int){

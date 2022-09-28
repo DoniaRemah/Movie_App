@@ -2,7 +2,7 @@ package com.example.moviebuster.model
 
 import com.google.gson.annotations.SerializedName
 
-data class GeneralMoviesList (
+data class GeneralMovieDetails (
     @SerializedName("id")
     val id: Int,
     val originalTitle: String,
